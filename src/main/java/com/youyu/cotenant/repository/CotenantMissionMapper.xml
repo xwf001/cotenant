@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youyu.cotenant.repository.CotenantMissionMapper">
+  <resultMap id="BaseResultMap" type="com.youyu.cotenant.entity.CotenantMission">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="district" jdbcType="VARCHAR" property="district" />
+    <result column="cotenant_count" jdbcType="INTEGER" property="cotenantCount" />
+    <result column="cotenant_type" jdbcType="INTEGER" property="cotenantType" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="cotenant_description" jdbcType="VARCHAR" property="cotenantDescription" />
+    <result column="chamber_img_url" jdbcType="VARCHAR" property="chamberImgUrl" />
+    <result column="chamber_description" jdbcType="VARCHAR" property="chamberDescription" />
+    <result column="chamber_video_url" jdbcType="VARCHAR" property="chamberVideoUrl" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+    <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, province, city, district, cotenant_count, cotenant_type, status, cotenant_description, 
+    chamber_img_url, chamber_description, chamber_video_url, created_time, updated_time, 
+    is_deleted
+  </sql>
+  <select id="selectByExample" parameterType="com.youyu.cotenant.entity.CotenantMissionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cotenant_mission
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cotenant_mission
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from cotenant_mission
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.youyu.cotenant.entity.CotenantMissionExample">
+    delete from cotenant_mission
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.youyu.cotenant.entity.CotenantMission">
+    insert into cotenant_mission (id, province, city, 
+      district, cotenant_count, cotenant_type, 
+      status, cotenant_description, chamber_img_url, 
+      chamber_description, chamber_video_url, created_time, 
+      updated_time, is_deleted)
+    values (#{id,jdbcType=BIGINT}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{district,jdbcType=VARCHAR}, #{cotenantCount,jdbcType=INTEGER}, #{cotenantType,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{cotenantDescription,jdbcType=VARCHAR}, #{chamberImgUrl,jdbcType=VARCHAR}, 
+      #{chamberDescription,jdbcType=VARCHAR}, #{chamberVideoUrl,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, 
+      #{updatedTime,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.youyu.cotenant.entity.CotenantMission">
+    insert into cotenant_mission
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="district != null">
+        district,
+      </if>
+      <if test="cotenantCount != null">
+        cotenant_count,
+      </if>
+      <if test="cotenantType != null">
+        cotenant_type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="cotenantDescription != null">
+        cotenant_description,
+      </if>
+      <if test="chamberImgUrl != null">
+        chamber_img_url,
+      </if>
+      <if test="chamberDescription != null">
+        chamber_description,
+      </if>
+      <if test="chamberVideoUrl != null">
+        chamber_video_url,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="updatedTime != null">
+        updated_time,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null">
+        #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="cotenantCount != null">
+        #{cotenantCount,jdbcType=INTEGER},
+      </if>
+      <if test="cotenantType != null">
+        #{cotenantType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="cotenantDescription != null">
+        #{cotenantDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="chamberImgUrl != null">
+        #{chamberImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="chamberDescription != null">
+        #{chamberDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="chamberVideoUrl != null">
+        #{chamberVideoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.youyu.cotenant.entity.CotenantMissionExample" resultType="java.lang.Long">
+    select count(*) from cotenant_mission
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update cotenant_mission
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.province != null">
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null">
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.district != null">
+        district = #{record.district,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cotenantCount != null">
+        cotenant_count = #{record.cotenantCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.cotenantType != null">
+        cotenant_type = #{record.cotenantType,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.cotenantDescription != null">
+        cotenant_description = #{record.cotenantDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chamberImgUrl != null">
+        chamber_img_url = #{record.chamberImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chamberDescription != null">
+        chamber_description = #{record.chamberDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chamberVideoUrl != null">
+        chamber_video_url = #{record.chamberVideoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdTime != null">
+        created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedTime != null">
+        updated_time = #{record.updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDeleted != null">
+        is_deleted = #{record.isDeleted,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update cotenant_mission
+    set id = #{record.id,jdbcType=BIGINT},
+      province = #{record.province,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      district = #{record.district,jdbcType=VARCHAR},
+      cotenant_count = #{record.cotenantCount,jdbcType=INTEGER},
+      cotenant_type = #{record.cotenantType,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      cotenant_description = #{record.cotenantDescription,jdbcType=VARCHAR},
+      chamber_img_url = #{record.chamberImgUrl,jdbcType=VARCHAR},
+      chamber_description = #{record.chamberDescription,jdbcType=VARCHAR},
+      chamber_video_url = #{record.chamberVideoUrl,jdbcType=VARCHAR},
+      created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+      updated_time = #{record.updatedTime,jdbcType=TIMESTAMP},
+      is_deleted = #{record.isDeleted,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.youyu.cotenant.entity.CotenantMission">
+    update cotenant_mission
+    <set>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null">
+        district = #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="cotenantCount != null">
+        cotenant_count = #{cotenantCount,jdbcType=INTEGER},
+      </if>
+      <if test="cotenantType != null">
+        cotenant_type = #{cotenantType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="cotenantDescription != null">
+        cotenant_description = #{cotenantDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="chamberImgUrl != null">
+        chamber_img_url = #{chamberImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="chamberDescription != null">
+        chamber_description = #{chamberDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="chamberVideoUrl != null">
+        chamber_video_url = #{chamberVideoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.youyu.cotenant.entity.CotenantMission">
+    update cotenant_mission
+    set province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      district = #{district,jdbcType=VARCHAR},
+      cotenant_count = #{cotenantCount,jdbcType=INTEGER},
+      cotenant_type = #{cotenantType,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      cotenant_description = #{cotenantDescription,jdbcType=VARCHAR},
+      chamber_img_url = #{chamberImgUrl,jdbcType=VARCHAR},
+      chamber_description = #{chamberDescription,jdbcType=VARCHAR},
+      chamber_video_url = #{chamberVideoUrl,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
