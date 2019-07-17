@@ -17,15 +17,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import static com.youyu.cotenant.common.CotenantConstants.CODE_CACHE;
+
 /**
  * 发送短信验证码
- *
  */
 @Service
 @Slf4j
 public class SmsService {
 
-    final String SIGN_NAME = "cotenant";
+    final String SIGN_NAME = "fansbox";
 
     final String TEMPLATE_CODE = "SMS_165119162";
 
@@ -69,7 +70,7 @@ public class SmsService {
                 throw new BizException(ResponseResult.fail(ResultCode.SEND_SMS_CODE_FAILED));
             }
             //如果消息发送成功
-            redisUtils.putCache("code_" + phoneNumber, code);
+            redisUtils.putCache(CODE_CACHE + phoneNumber, code);
         } catch (Exception e) {
             log.error("send sms message failed:", e.getMessage(), e);
             throw new BizException(ResponseResult.fail(ResultCode.SEND_SMS_CODE_FAILED));

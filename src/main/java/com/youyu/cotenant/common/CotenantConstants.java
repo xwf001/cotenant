@@ -10,13 +10,11 @@ public interface CotenantConstants {
     //默认起始页
     int DEFAULT_PAGE_OFFSET = 0;
 
-    String tokenId = "52067";
-
-    String secret = "f05bfe5acd22d13c3881dcb0deaaf4c0";
-
     String FULL_DATE_TIME = "yyyy-MM-dd HH:mm:ss";
 
     String DEFAULT_PASSWORD = "123456";
+
+    String CODE_CACHE = "code_";
 
 
 }
