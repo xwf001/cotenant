@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.youyu.cotenant.repository.CotenantMissionUserMapper">
-  <resultMap id="BaseResultMap" type="com.youyu.cotenant.entity.CotenantMissionUser">
+<mapper namespace="com.youyu.cotenant.repository.CotenantGroupUserMapper">
+  <resultMap id="BaseResultMap" type="com.youyu.cotenant.entity.CotenantGroupUser">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="cotenant_mission_id" jdbcType="BIGINT" property="cotenantMissionId" />
+    <result column="cotenant_group_id" jdbcType="BIGINT" property="cotenantGroupId" />
     <result column="cotenant_user_id" jdbcType="BIGINT" property="cotenantUserId" />
     <result column="role" jdbcType="INTEGER" property="role" />
     <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
     <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
     <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
   </resultMap>
@@ -69,15 +70,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, cotenant_mission_id, cotenant_user_id, role, status, updated_time, is_deleted
+    id, cotenant_group_id, cotenant_user_id, role, status, created_time, updated_time, 
+    is_deleted
   </sql>
-  <select id="selectByExample" parameterType="com.youyu.cotenant.entity.CotenantMissionUserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.youyu.cotenant.entity.CotenantGroupUserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from cotenant_mission_user
+    from cotenant_group_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,35 +90,35 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from cotenant_mission_user
+    from cotenant_group_user
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from cotenant_mission_user
+    delete from cotenant_group_user
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.youyu.cotenant.entity.CotenantMissionUserExample">
-    delete from cotenant_mission_user
+  <delete id="deleteByExample" parameterType="com.youyu.cotenant.entity.CotenantGroupUserExample">
+    delete from cotenant_group_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.youyu.cotenant.entity.CotenantMissionUser">
-    insert into cotenant_mission_user (id, cotenant_mission_id, cotenant_user_id, 
-      role, status, updated_time, 
-      is_deleted)
-    values (#{id,jdbcType=BIGINT}, #{cotenantMissionId,jdbcType=BIGINT}, #{cotenantUserId,jdbcType=BIGINT}, 
-      #{role,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{updatedTime,jdbcType=TIMESTAMP}, 
-      #{isDeleted,jdbcType=BIT})
+  <insert id="insert" parameterType="com.youyu.cotenant.entity.CotenantGroupUser">
+    insert into cotenant_group_user (id, cotenant_group_id, cotenant_user_id, 
+      role, status, created_time, 
+      updated_time, is_deleted)
+    values (#{id,jdbcType=BIGINT}, #{cotenantGroupId,jdbcType=BIGINT}, #{cotenantUserId,jdbcType=BIGINT}, 
+      #{role,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{createdTime,jdbcType=TIMESTAMP}, 
+      #{updatedTime,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.youyu.cotenant.entity.CotenantMissionUser">
-    insert into cotenant_mission_user
+  <insert id="insertSelective" parameterType="com.youyu.cotenant.entity.CotenantGroupUser">
+    insert into cotenant_group_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="cotenantMissionId != null">
-        cotenant_mission_id,
+      <if test="cotenantGroupId != null">
+        cotenant_group_id,
       </if>
       <if test="cotenantUserId != null">
         cotenant_user_id,
@@ -126,6 +128,9 @@
       </if>
       <if test="status != null">
         status,
+      </if>
+      <if test="createdTime != null">
+        created_time,
       </if>
       <if test="updatedTime != null">
         updated_time,
@@ -138,8 +143,8 @@
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="cotenantMissionId != null">
-        #{cotenantMissionId,jdbcType=BIGINT},
+      <if test="cotenantGroupId != null">
+        #{cotenantGroupId,jdbcType=BIGINT},
       </if>
       <if test="cotenantUserId != null">
         #{cotenantUserId,jdbcType=BIGINT},
@@ -150,6 +155,9 @@
       <if test="status != null">
         #{status,jdbcType=INTEGER},
       </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="updatedTime != null">
         #{updatedTime,jdbcType=TIMESTAMP},
       </if>
@@ -158,20 +166,20 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.youyu.cotenant.entity.CotenantMissionUserExample" resultType="java.lang.Long">
-    select count(*) from cotenant_mission_user
+  <select id="countByExample" parameterType="com.youyu.cotenant.entity.CotenantGroupUserExample" resultType="java.lang.Long">
+    select count(*) from cotenant_group_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update cotenant_mission_user
+    update cotenant_group_user
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.cotenantMissionId != null">
-        cotenant_mission_id = #{record.cotenantMissionId,jdbcType=BIGINT},
+      <if test="record.cotenantGroupId != null">
+        cotenant_group_id = #{record.cotenantGroupId,jdbcType=BIGINT},
       </if>
       <if test="record.cotenantUserId != null">
         cotenant_user_id = #{record.cotenantUserId,jdbcType=BIGINT},
@@ -181,6 +189,9 @@
       </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdTime != null">
+        created_time = #{record.createdTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.updatedTime != null">
         updated_time = #{record.updatedTime,jdbcType=TIMESTAMP},
@@ -194,23 +205,24 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update cotenant_mission_user
+    update cotenant_group_user
     set id = #{record.id,jdbcType=BIGINT},
-      cotenant_mission_id = #{record.cotenantMissionId,jdbcType=BIGINT},
+      cotenant_group_id = #{record.cotenantGroupId,jdbcType=BIGINT},
       cotenant_user_id = #{record.cotenantUserId,jdbcType=BIGINT},
       role = #{record.role,jdbcType=INTEGER},
       status = #{record.status,jdbcType=INTEGER},
+      created_time = #{record.createdTime,jdbcType=TIMESTAMP},
       updated_time = #{record.updatedTime,jdbcType=TIMESTAMP},
       is_deleted = #{record.isDeleted,jdbcType=BIT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.youyu.cotenant.entity.CotenantMissionUser">
-    update cotenant_mission_user
+  <update id="updateByPrimaryKeySelective" parameterType="com.youyu.cotenant.entity.CotenantGroupUser">
+    update cotenant_group_user
     <set>
-      <if test="cotenantMissionId != null">
-        cotenant_mission_id = #{cotenantMissionId,jdbcType=BIGINT},
+      <if test="cotenantGroupId != null">
+        cotenant_group_id = #{cotenantGroupId,jdbcType=BIGINT},
       </if>
       <if test="cotenantUserId != null">
         cotenant_user_id = #{cotenantUserId,jdbcType=BIGINT},
@@ -221,6 +233,9 @@
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
       </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="updatedTime != null">
         updated_time = #{updatedTime,jdbcType=TIMESTAMP},
       </if>
@@ -230,12 +245,13 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.youyu.cotenant.entity.CotenantMissionUser">
-    update cotenant_mission_user
-    set cotenant_mission_id = #{cotenantMissionId,jdbcType=BIGINT},
+  <update id="updateByPrimaryKey" parameterType="com.youyu.cotenant.entity.CotenantGroupUser">
+    update cotenant_group_user
+    set cotenant_group_id = #{cotenantGroupId,jdbcType=BIGINT},
       cotenant_user_id = #{cotenantUserId,jdbcType=BIGINT},
       role = #{role,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
       updated_time = #{updatedTime,jdbcType=TIMESTAMP},
       is_deleted = #{isDeleted,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}

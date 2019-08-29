@@ -57,11 +57,41 @@ public enum ResultCode {
      */
     OLD_PASSWORD_ERROR(470, "旧密码错误"),
 
+    /**
+     * 补全个人信息
+     */
+    USER_INFO_ERROR(490, "请补全您的个人信息"),
 
     /**
      * 服务器异常
      */
-    INTERNAL_SERVER_ERROR(500, "服务器异常");
+    INTERNAL_SERVER_ERROR(500, "服务器异常"),
+
+    /**
+     * 没有该租房团
+     */
+    NO_COTENANT_GROUP(100010, "未找到该租房团"),
+
+    /**
+     * 已参加过租房团
+     */
+    EXIST_COTENANT_GROUP(100030, "已加入其他租房团"),
+
+    /**
+     * 该租房团人数已满
+     */
+    COTENANT_GROUP_FULL(100050, "该租房团人数已满"),
+
+    /**
+     * 无权限操作
+     */
+    NO_PERMISSION_OPERATION(100070, "抱歉，您无权限操作"),
+
+    /**
+     * 用户信息审核未通过
+     */
+    UNPASS_USER(100090, "抱歉，您的审毕业证/学生证核未通过");
+
 
     ResultCode(Integer code, String msg) {
         this.code = code;

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.youyu.cotenant.repository.CotenantMissionMapper">
-  <resultMap id="BaseResultMap" type="com.youyu.cotenant.entity.CotenantMission">
+<mapper namespace="com.youyu.cotenant.repository.CotenantGroupMapper">
+  <resultMap id="BaseResultMap" type="com.youyu.cotenant.entity.CotenantGroup">
     <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="province" jdbcType="VARCHAR" property="province" />
     <result column="city" jdbcType="VARCHAR" property="city" />
     <result column="district" jdbcType="VARCHAR" property="district" />
@@ -76,17 +77,17 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, province, city, district, cotenant_count, cotenant_type, status, cotenant_description, 
+    id, title, province, city, district, cotenant_count, cotenant_type, status, cotenant_description, 
     chamber_img_url, chamber_description, chamber_video_url, created_time, updated_time, 
     is_deleted
   </sql>
-  <select id="selectByExample" parameterType="com.youyu.cotenant.entity.CotenantMissionExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.youyu.cotenant.entity.CotenantGroupExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from cotenant_mission
+    from cotenant_group
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -97,36 +98,41 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from cotenant_mission
+    from cotenant_group
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from cotenant_mission
+    delete from cotenant_group
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.youyu.cotenant.entity.CotenantMissionExample">
-    delete from cotenant_mission
+  <delete id="deleteByExample" parameterType="com.youyu.cotenant.entity.CotenantGroupExample">
+    delete from cotenant_group
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.youyu.cotenant.entity.CotenantMission">
-    insert into cotenant_mission (id, province, city, 
-      district, cotenant_count, cotenant_type, 
-      status, cotenant_description, chamber_img_url, 
-      chamber_description, chamber_video_url, created_time, 
-      updated_time, is_deleted)
-    values (#{id,jdbcType=BIGINT}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
-      #{district,jdbcType=VARCHAR}, #{cotenantCount,jdbcType=INTEGER}, #{cotenantType,jdbcType=INTEGER}, 
-      #{status,jdbcType=INTEGER}, #{cotenantDescription,jdbcType=VARCHAR}, #{chamberImgUrl,jdbcType=VARCHAR}, 
-      #{chamberDescription,jdbcType=VARCHAR}, #{chamberVideoUrl,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, 
-      #{updatedTime,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=BIT})
+  <insert id="insert" parameterType="com.youyu.cotenant.entity.CotenantGroup">
+    insert into cotenant_group (id, title, province, 
+      city, district, cotenant_count, 
+      cotenant_type, status, cotenant_description, 
+      chamber_img_url, chamber_description, chamber_video_url, 
+      created_time, updated_time, is_deleted
+      )
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, #{cotenantCount,jdbcType=INTEGER}, 
+      #{cotenantType,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{cotenantDescription,jdbcType=VARCHAR}, 
+      #{chamberImgUrl,jdbcType=VARCHAR}, #{chamberDescription,jdbcType=VARCHAR}, #{chamberVideoUrl,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=BIT}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.youyu.cotenant.entity.CotenantMission">
-    insert into cotenant_mission
+  <insert id="insertSelective" parameterType="com.youyu.cotenant.entity.CotenantGroup">
+    insert into cotenant_group
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
+      </if>
+      <if test="title != null">
+        title,
       </if>
       <if test="province != null">
         province,
@@ -172,6 +178,9 @@
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
       <if test="province != null">
         #{province,jdbcType=VARCHAR},
       </if>
@@ -213,17 +222,20 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.youyu.cotenant.entity.CotenantMissionExample" resultType="java.lang.Long">
-    select count(*) from cotenant_mission
+  <select id="countByExample" parameterType="com.youyu.cotenant.entity.CotenantGroupExample" resultType="java.lang.Long">
+    select count(*) from cotenant_group
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update cotenant_mission
+    update cotenant_group
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
       </if>
       <if test="record.province != null">
         province = #{record.province,jdbcType=VARCHAR},
@@ -270,8 +282,9 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update cotenant_mission
+    update cotenant_group
     set id = #{record.id,jdbcType=BIGINT},
+      title = #{record.title,jdbcType=VARCHAR},
       province = #{record.province,jdbcType=VARCHAR},
       city = #{record.city,jdbcType=VARCHAR},
       district = #{record.district,jdbcType=VARCHAR},
@@ -289,9 +302,12 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.youyu.cotenant.entity.CotenantMission">
-    update cotenant_mission
+  <update id="updateByPrimaryKeySelective" parameterType="com.youyu.cotenant.entity.CotenantGroup">
+    update cotenant_group
     <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
       <if test="province != null">
         province = #{province,jdbcType=VARCHAR},
       </if>
@@ -334,9 +350,10 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.youyu.cotenant.entity.CotenantMission">
-    update cotenant_mission
-    set province = #{province,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.youyu.cotenant.entity.CotenantGroup">
+    update cotenant_group
+    set title = #{title,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
       city = #{city,jdbcType=VARCHAR},
       district = #{district,jdbcType=VARCHAR},
       cotenant_count = #{cotenantCount,jdbcType=INTEGER},

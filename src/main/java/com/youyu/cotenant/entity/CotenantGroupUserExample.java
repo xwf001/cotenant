@@ -4,14 +4,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CotenantMissionUserExample {
+public class CotenantGroupUserExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public CotenantMissionUserExample() {
+    public CotenantGroupUserExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -165,63 +165,63 @@ public class CotenantMissionUserExample {
             return (Criteria) this;
         }
 
-        public Criteria andCotenantMissionIdIsNull() {
-            addCriterion("cotenant_mission_id is null");
+        public Criteria andCotenantGroupIdIsNull() {
+            addCriterion("cotenant_group_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andCotenantMissionIdIsNotNull() {
-            addCriterion("cotenant_mission_id is not null");
+        public Criteria andCotenantGroupIdIsNotNull() {
+            addCriterion("cotenant_group_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCotenantMissionIdEqualTo(Long value) {
-            addCriterion("cotenant_mission_id =", value, "cotenantMissionId");
+        public Criteria andCotenantGroupIdEqualTo(Long value) {
+            addCriterion("cotenant_group_id =", value, "cotenantGroupId");
             return (Criteria) this;
         }
 
-        public Criteria andCotenantMissionIdNotEqualTo(Long value) {
-            addCriterion("cotenant_mission_id <>", value, "cotenantMissionId");
+        public Criteria andCotenantGroupIdNotEqualTo(Long value) {
+            addCriterion("cotenant_group_id <>", value, "cotenantGroupId");
             return (Criteria) this;
         }
 
-        public Criteria andCotenantMissionIdGreaterThan(Long value) {
-            addCriterion("cotenant_mission_id >", value, "cotenantMissionId");
+        public Criteria andCotenantGroupIdGreaterThan(Long value) {
+            addCriterion("cotenant_group_id >", value, "cotenantGroupId");
             return (Criteria) this;
         }
 
-        public Criteria andCotenantMissionIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("cotenant_mission_id >=", value, "cotenantMissionId");
+        public Criteria andCotenantGroupIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("cotenant_group_id >=", value, "cotenantGroupId");
             return (Criteria) this;
         }
 
-        public Criteria andCotenantMissionIdLessThan(Long value) {
-            addCriterion("cotenant_mission_id <", value, "cotenantMissionId");
+        public Criteria andCotenantGroupIdLessThan(Long value) {
+            addCriterion("cotenant_group_id <", value, "cotenantGroupId");
             return (Criteria) this;
         }
 
-        public Criteria andCotenantMissionIdLessThanOrEqualTo(Long value) {
-            addCriterion("cotenant_mission_id <=", value, "cotenantMissionId");
+        public Criteria andCotenantGroupIdLessThanOrEqualTo(Long value) {
+            addCriterion("cotenant_group_id <=", value, "cotenantGroupId");
             return (Criteria) this;
         }
 
-        public Criteria andCotenantMissionIdIn(List<Long> values) {
-            addCriterion("cotenant_mission_id in", values, "cotenantMissionId");
+        public Criteria andCotenantGroupIdIn(List<Long> values) {
+            addCriterion("cotenant_group_id in", values, "cotenantGroupId");
             return (Criteria) this;
         }
 
-        public Criteria andCotenantMissionIdNotIn(List<Long> values) {
-            addCriterion("cotenant_mission_id not in", values, "cotenantMissionId");
+        public Criteria andCotenantGroupIdNotIn(List<Long> values) {
+            addCriterion("cotenant_group_id not in", values, "cotenantGroupId");
             return (Criteria) this;
         }
 
-        public Criteria andCotenantMissionIdBetween(Long value1, Long value2) {
-            addCriterion("cotenant_mission_id between", value1, value2, "cotenantMissionId");
+        public Criteria andCotenantGroupIdBetween(Long value1, Long value2) {
+            addCriterion("cotenant_group_id between", value1, value2, "cotenantGroupId");
             return (Criteria) this;
         }
 
-        public Criteria andCotenantMissionIdNotBetween(Long value1, Long value2) {
-            addCriterion("cotenant_mission_id not between", value1, value2, "cotenantMissionId");
+        public Criteria andCotenantGroupIdNotBetween(Long value1, Long value2) {
+            addCriterion("cotenant_group_id not between", value1, value2, "cotenantGroupId");
             return (Criteria) this;
         }
 
@@ -402,6 +402,66 @@ public class CotenantMissionUserExample {
 
         public Criteria andStatusNotBetween(Integer value1, Integer value2) {
             addCriterion("status not between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedTimeIsNull() {
+            addCriterion("created_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedTimeIsNotNull() {
+            addCriterion("created_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedTimeEqualTo(LocalDateTime value) {
+            addCriterion("created_time =", value, "createdTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedTimeNotEqualTo(LocalDateTime value) {
+            addCriterion("created_time <>", value, "createdTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedTimeGreaterThan(LocalDateTime value) {
+            addCriterion("created_time >", value, "createdTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedTimeGreaterThanOrEqualTo(LocalDateTime value) {
+            addCriterion("created_time >=", value, "createdTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedTimeLessThan(LocalDateTime value) {
+            addCriterion("created_time <", value, "createdTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedTimeLessThanOrEqualTo(LocalDateTime value) {
+            addCriterion("created_time <=", value, "createdTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedTimeIn(List<LocalDateTime> values) {
+            addCriterion("created_time in", values, "createdTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedTimeNotIn(List<LocalDateTime> values) {
+            addCriterion("created_time not in", values, "createdTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedTimeBetween(LocalDateTime value1, LocalDateTime value2) {
+            addCriterion("created_time between", value1, value2, "createdTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedTimeNotBetween(LocalDateTime value1, LocalDateTime value2) {
+            addCriterion("created_time not between", value1, value2, "createdTime");
             return (Criteria) this;
         }
 

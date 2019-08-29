@@ -3,16 +3,18 @@ package com.youyu.cotenant.entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class CotenantMissionUser implements Serializable {
+public class CotenantGroupUser implements Serializable {
     private Long id;
 
-    private Long cotenantMissionId;
+    private Long cotenantGroupId;
 
     private Long cotenantUserId;
 
     private Integer role;
 
     private Integer status;
+
+    private LocalDateTime createdTime;
 
     private LocalDateTime updatedTime;
 
@@ -28,12 +30,12 @@ public class CotenantMissionUser implements Serializable {
         this.id = id;
     }
 
-    public Long getCotenantMissionId() {
-        return cotenantMissionId;
+    public Long getCotenantGroupId() {
+        return cotenantGroupId;
     }
 
-    public void setCotenantMissionId(Long cotenantMissionId) {
-        this.cotenantMissionId = cotenantMissionId;
+    public void setCotenantGroupId(Long cotenantGroupId) {
+        this.cotenantGroupId = cotenantGroupId;
     }
 
     public Long getCotenantUserId() {
@@ -58,6 +60,14 @@ public class CotenantMissionUser implements Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public LocalDateTime getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(LocalDateTime createdTime) {
+        this.createdTime = createdTime;
     }
 
     public LocalDateTime getUpdatedTime() {

@@ -12,6 +12,10 @@ public class CotenantUserInfo implements Serializable {
 
     private Integer sex;
 
+    private String college;
+
+    private String degree;
+
     private LocalDateTime startTime;
 
     private LocalDateTime endTime;
@@ -21,6 +25,8 @@ public class CotenantUserInfo implements Serializable {
     private String diplomaUrl;
 
     private String interest;
+
+    private Integer status;
 
     private LocalDateTime createdTime;
 
@@ -62,6 +68,22 @@ public class CotenantUserInfo implements Serializable {
         this.sex = sex;
     }
 
+    public String getCollege() {
+        return college;
+    }
+
+    public void setCollege(String college) {
+        this.college = college;
+    }
+
+    public String getDegree() {
+        return degree;
+    }
+
+    public void setDegree(String degree) {
+        this.degree = degree;
+    }
+
     public LocalDateTime getStartTime() {
         return startTime;
     }
@@ -100,6 +122,14 @@ public class CotenantUserInfo implements Serializable {
 
     public void setInterest(String interest) {
         this.interest = interest;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public LocalDateTime getCreatedTime() {
