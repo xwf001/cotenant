@@ -11,12 +11,10 @@ import io.goeasy.publish.GoEasyError;
 import io.goeasy.publish.PublishListener;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -55,29 +53,22 @@ public class ChatService {
      * @param channel
      */
     public List<ChatMessageOutVM> getMessage(String channel) {
-        List<String> msgList;
-        List<ChatMessageOutVM> chatMessageOutVMList = new ArrayList<>();
-        try {
-            //缓存验证
-            if (mSpringRedisUtils.hasKey(channel)) {
-                //获取聊天记录
-                msgList = mSpringRedisUtils.lRange(channel, NumberUtils.INTEGER_ZERO, mSpringRedisUtils.lLen(channel) - 1);
-                for (String msg : msgList) {
-                    ChatMessageOutVM chatMessageOutVM = objectMapper.readValue(msg, ChatMessageOutVM.class);
-                    chatMessageOutVMList.add(chatMessageOutVM);
-                }
-            }
-        } catch (Exception e) {
+        List<ChatMessageOutVM> chatMessageOutVMList = null;
 
-        }
         return chatMessageOutVMList;
     }
-
 
     /**
      * 获取聊天列表
      */
     public void list() {
+
+    }
+
+    /**
+     * 发送消息
+     */
+    public void send(){
 
     }
 
