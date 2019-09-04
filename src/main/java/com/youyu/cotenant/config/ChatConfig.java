@@ -8,10 +8,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ChatConfig {
 
-    @Value("goeasy.rest-host")
+    @Value("${goeasy.rest-host}")
     private String restHost;
 
-    @Value("goeasy.app-key")
+    @Value("${goeasy.app-key}")
     private String appKey;
 
     @Bean

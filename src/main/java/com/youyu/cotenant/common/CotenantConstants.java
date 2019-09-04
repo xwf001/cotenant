@@ -49,7 +49,6 @@ public interface CotenantConstants {
      */
     interface GROUP_ROLE {
         int LEADER = 1;  //团长
-
         int MEMBER = 2;  //团员
     }
 

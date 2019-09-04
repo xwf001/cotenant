@@ -53,7 +53,6 @@ public class RedisUtils {
         if (timeout <= 0) {
             throw new IllegalArgumentException("time out cannot less than zero");
         }
-        
         stringRedisTemplate.opsForValue().set(KEY + key, value, timeout, timeUnit);
     }
     
