@@ -6,11 +6,14 @@
     <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="college" jdbcType="VARCHAR" property="college" />
+    <result column="degree" jdbcType="VARCHAR" property="degree" />
     <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
     <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
     <result column="id_card_url" jdbcType="VARCHAR" property="idCardUrl" />
     <result column="diploma_url" jdbcType="VARCHAR" property="diplomaUrl" />
     <result column="interest" jdbcType="VARCHAR" property="interest" />
+    <result column="status" jdbcType="INTEGER" property="status" />
     <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
     <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
     <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
@@ -74,8 +77,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_id, nick_name, user_name, sex, start_time, end_time, id_card_url, diploma_url, 
-    interest, created_time, updated_time, is_deleted
+    user_id, nick_name, user_name, sex, college, degree, start_time, end_time, id_card_url, 
+    diploma_url, interest, status, created_time, updated_time, is_deleted
   </sql>
   <select id="selectByExample" parameterType="com.youyu.cotenant.entity.CotenantUserInfoExample" resultMap="BaseResultMap">
     select
@@ -109,13 +112,15 @@
   </delete>
   <insert id="insert" parameterType="com.youyu.cotenant.entity.CotenantUserInfo">
     insert into cotenant_user_info (user_id, nick_name, user_name, 
-      sex, start_time, end_time, 
-      id_card_url, diploma_url, interest, 
+      sex, college, degree, 
+      start_time, end_time, id_card_url, 
+      diploma_url, interest, status, 
       created_time, updated_time, is_deleted
       )
     values (#{userId,jdbcType=BIGINT}, #{nickName,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
-      #{idCardUrl,jdbcType=VARCHAR}, #{diplomaUrl,jdbcType=VARCHAR}, #{interest,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{college,jdbcType=VARCHAR}, #{degree,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{idCardUrl,jdbcType=VARCHAR}, 
+      #{diplomaUrl,jdbcType=VARCHAR}, #{interest,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
       #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=BIT}
       )
   </insert>
@@ -134,6 +139,12 @@
       <if test="sex != null">
         sex,
       </if>
+      <if test="college != null">
+        college,
+      </if>
+      <if test="degree != null">
+        degree,
+      </if>
       <if test="startTime != null">
         start_time,
       </if>
@@ -148,6 +159,9 @@
       </if>
       <if test="interest != null">
         interest,
+      </if>
+      <if test="status != null">
+        status,
       </if>
       <if test="createdTime != null">
         created_time,
@@ -172,6 +186,12 @@
       <if test="sex != null">
         #{sex,jdbcType=INTEGER},
       </if>
+      <if test="college != null">
+        #{college,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        #{degree,jdbcType=VARCHAR},
+      </if>
       <if test="startTime != null">
         #{startTime,jdbcType=TIMESTAMP},
       </if>
@@ -186,6 +206,9 @@
       </if>
       <if test="interest != null">
         #{interest,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="createdTime != null">
         #{createdTime,jdbcType=TIMESTAMP},
@@ -219,6 +242,12 @@
       <if test="record.sex != null">
         sex = #{record.sex,jdbcType=INTEGER},
       </if>
+      <if test="record.college != null">
+        college = #{record.college,jdbcType=VARCHAR},
+      </if>
+      <if test="record.degree != null">
+        degree = #{record.degree,jdbcType=VARCHAR},
+      </if>
       <if test="record.startTime != null">
         start_time = #{record.startTime,jdbcType=TIMESTAMP},
       </if>
@@ -233,6 +262,9 @@
       </if>
       <if test="record.interest != null">
         interest = #{record.interest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
       </if>
       <if test="record.createdTime != null">
         created_time = #{record.createdTime,jdbcType=TIMESTAMP},
@@ -254,11 +286,14 @@
       nick_name = #{record.nickName,jdbcType=VARCHAR},
       user_name = #{record.userName,jdbcType=VARCHAR},
       sex = #{record.sex,jdbcType=INTEGER},
+      college = #{record.college,jdbcType=VARCHAR},
+      degree = #{record.degree,jdbcType=VARCHAR},
       start_time = #{record.startTime,jdbcType=TIMESTAMP},
       end_time = #{record.endTime,jdbcType=TIMESTAMP},
       id_card_url = #{record.idCardUrl,jdbcType=VARCHAR},
       diploma_url = #{record.diplomaUrl,jdbcType=VARCHAR},
       interest = #{record.interest,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
       created_time = #{record.createdTime,jdbcType=TIMESTAMP},
       updated_time = #{record.updatedTime,jdbcType=TIMESTAMP},
       is_deleted = #{record.isDeleted,jdbcType=BIT}
@@ -278,6 +313,12 @@
       <if test="sex != null">
         sex = #{sex,jdbcType=INTEGER},
       </if>
+      <if test="college != null">
+        college = #{college,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        degree = #{degree,jdbcType=VARCHAR},
+      </if>
       <if test="startTime != null">
         start_time = #{startTime,jdbcType=TIMESTAMP},
       </if>
@@ -292,6 +333,9 @@
       </if>
       <if test="interest != null">
         interest = #{interest,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
       </if>
       <if test="createdTime != null">
         created_time = #{createdTime,jdbcType=TIMESTAMP},
@@ -310,11 +354,14 @@
     set nick_name = #{nickName,jdbcType=VARCHAR},
       user_name = #{userName,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=INTEGER},
+      college = #{college,jdbcType=VARCHAR},
+      degree = #{degree,jdbcType=VARCHAR},
       start_time = #{startTime,jdbcType=TIMESTAMP},
       end_time = #{endTime,jdbcType=TIMESTAMP},
       id_card_url = #{idCardUrl,jdbcType=VARCHAR},
       diploma_url = #{diplomaUrl,jdbcType=VARCHAR},
       interest = #{interest,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
       created_time = #{createdTime,jdbcType=TIMESTAMP},
       updated_time = #{updatedTime,jdbcType=TIMESTAMP},
       is_deleted = #{isDeleted,jdbcType=BIT}

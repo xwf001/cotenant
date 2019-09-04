@@ -3,8 +3,10 @@ package com.youyu.cotenant.entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class CotenantMission implements Serializable {
+public class CotenantGroup implements Serializable {
     private Long id;
+
+    private String title;
 
     private String province;
 
@@ -40,6 +42,14 @@ public class CotenantMission implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getProvince() {

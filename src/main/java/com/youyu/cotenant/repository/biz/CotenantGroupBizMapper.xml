@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youyu.cotenant.repository.biz.CotenantGroupBizMapper">
+    <resultMap id="BaseResultMap" type="com.youyu.cotenant.entity.CotenantGroup">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="province" jdbcType="VARCHAR" property="province"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="district" jdbcType="VARCHAR" property="district"/>
+        <result column="cotenant_count" jdbcType="INTEGER" property="cotenantCount"/>
+        <result column="cotenant_type" jdbcType="INTEGER" property="cotenantType"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="cotenant_description" jdbcType="VARCHAR" property="cotenantDescription"/>
+        <result column="chamber_img_url" jdbcType="VARCHAR" property="chamberImgUrl"/>
+        <result column="chamber_description" jdbcType="VARCHAR" property="chamberDescription"/>
+        <result column="chamber_video_url" jdbcType="VARCHAR" property="chamberVideoUrl"/>
+        <result column="created_time" jdbcType="TIMESTAMP" property="createdTime"/>
+        <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime"/>
+        <result column="is_deleted" jdbcType="BIT" property="isDeleted"/>
+    </resultMap>
+
+    <resultMap id="GroupListOutVM" type="com.youyu.cotenant.web.rest.vm.group.GroupListOutVM">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="province" jdbcType="VARCHAR" property="province"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="district" jdbcType="VARCHAR" property="district"/>
+        <result column="leader" jdbcType="VARCHAR" property="leader"/>
+        <result column="cotenant_count" jdbcType="INTEGER" property="cotenantCount"/>
+        <result column="cotenant_type" jdbcType="INTEGER" property="cotenantType"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="chamber_img_url" jdbcType="VARCHAR" property="chamberImgUrl"/>
+        <result column="created_time" jdbcType="TIMESTAMP" property="createdTime"/>
+    </resultMap>
+
+    <resultMap id="GroupDetailOutVM" type="com.youyu.cotenant.web.rest.vm.group.GroupDetailOutVM">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="province" jdbcType="VARCHAR" property="province"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="district" jdbcType="VARCHAR" property="district"/>
+        <result column="cotenant_count" jdbcType="INTEGER" property="cotenantCount"/>
+        <result column="cotenant_type" jdbcType="INTEGER" property="cotenantType"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="cotenant_description" jdbcType="VARCHAR" property="cotenantDescription"/>
+        <result column="chamber_img_url" jdbcType="VARCHAR" property="chamberImgUrl"/>
+        <result column="chamber_description" jdbcType="VARCHAR" property="chamberDescription"/>
+        <result column="chamber_video_url" jdbcType="VARCHAR" property="chamberVideoUrl"/>
+        <result column="created_time" jdbcType="TIMESTAMP" property="createdTime"/>
+    </resultMap>
+
+    <resultMap id="CotenantListOutVM" type="com.youyu.cotenant.web.rest.vm.group.CotenantListOutVM">
+        <result column="role" jdbcType="INTEGER" property="role"/>
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName"/>
+        <result column="college" jdbcType="VARCHAR" property="college"/>
+        <result column="interest" jdbcType="VARCHAR" property="interest"/>
+    </resultMap>
+
+    <select id="selectGroupList" resultMap="GroupListOutVM">
+        select cg.id,cg.title,cg.province,cg.city,cg.district,cui.user_name as
+        leader,cg.cotenant_count,cg.cotenant_type,cg.status,cg.chamber_img_url,cg.created_time from cotenant_group cg
+        join cotenant_group_user cgu on cgu.cotenant_group_id = cg.id
+        join cotenant_user_info cui on cui.user_id = cgu.cotenant_user_id
+        where cgu.status = 10 and cgu.role=1
+        <if test="groupQueryInVM != null and groupQueryInVM.college != null">
+            and cui.college = #{groupQueryInVM.college}
+        </if>
+        <if test="groupQueryInVM != null and groupQueryInVM.cotenantType != null">
+            and cg.cotenant_type = #{groupQueryInVM.cotenantType}
+        </if>
+        <if test="groupQueryInVM != null and groupQueryInVM.province != null">
+            and cg.province = #{groupQueryInVM.province}
+        </if>
+        <if test="groupQueryInVM != null and groupQueryInVM.city != null">
+            and cg.city = #{groupQueryInVM.city}
+        </if>
+        <if test="groupQueryInVM != null and groupQueryInVM.district != null">
+            and cg.district = #{groupQueryInVM.district}
+        </if>
+        <if test="groupQueryInVM != null and groupQueryInVM.cotenantCount != null">
+            and cg.cotenant_count = #{groupQueryInVM.cotenantCount}
+        </if>
+        order by cg.created_time desc
+    </select>
+
+    <select id="selectGroupDetail" resultMap="GroupDetailOutVM">
+        select
+          cg.id,cg.title,cg.province,cg.city,cg.district,cui.user_name as leader,cg.cotenant_count,cg.cotenant_type,cg.status,cg.chamber_img_url,cg.cotenant_description,cg.chamber_description,cg.chamber_video_url,cg.created_time
+          from cotenant_group cg
+          join cotenant_group_user cgu on cgu.cotenant_group_id = cg.id
+          join cotenant_user_info cui on cui.user_id = cgu.cotenant_user_id
+          where cgu.status = 10 and cgu.role=1 and cg.id = #{id}
+    </select>
+
+    <select id="selectCotenantList" resultMap="CotenantListOutVM">
+        select role,cui.nick_name,cui.college,cui.interest from cotenant_group_user cgu
+          join cotenant_user_info cui on cui.user_id = cgu.cotenant_user_id
+          where cgu.cotenant_group_id = #{id} and cgu.role = 2 and cgu.status = 10
+    </select>
+
+    <select id="selectGroupLeader">
+        select cotenant_user_id from cotenant_group_user where cotenant_group_id = #{groupId} and role = 1
+    </select>
+
+
+
+</mapper>

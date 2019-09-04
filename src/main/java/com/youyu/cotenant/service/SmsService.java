@@ -64,7 +64,7 @@ public class SmsService {
         try {
             CommonResponse response = client.getCommonResponse(request);
             String result = response.getData();
-            log.info("result info : {}", result);
+            log.info("sendSms result info : {}", result);
             SmsMessage smsMessage = objectMapper.readValue(result, SmsMessage.class);
             if (!"OK".equalsIgnoreCase(smsMessage.getCode())) {
                 throw new BizException(ResponseResult.fail(ResultCode.SEND_SMS_CODE_FAILED));

@@ -108,7 +108,29 @@
             <artifactId>jjwt</artifactId>
             <version>0.9.0</version>
         </dependency>
+        <!-- qiniu -->
+        <dependency>
+            <groupId>com.qiniu</groupId>
+            <artifactId>qiniu-java-sdk</artifactId>
+            <version>[7.2.0, 7.2.99]</version>
+        </dependency>
+        <!-- 即时通讯 -->
+        <dependency>
+            <groupId>io.goeasy</groupId>
+            <artifactId>goeasy-sdk</artifactId>
+            <version>0.3.8</version>
+        </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>goeasy</id>
+            <name>goeasy</name>
+            <url>
+                http://maven.goeasy.io/content/repositories/releases/
+            </url>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>
