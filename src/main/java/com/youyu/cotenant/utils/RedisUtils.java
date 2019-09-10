@@ -2,9 +2,11 @@ package com.youyu.cotenant.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.RedisConnectionFailureException;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -12,6 +14,7 @@ public class RedisUtils {
     
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
+
 
     final String KEY = "cotenant_";
     
@@ -75,4 +78,7 @@ public class RedisUtils {
     public void delCache(String key) {
         stringRedisTemplate.delete(KEY + key);
     }
+
+
+
 }

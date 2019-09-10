@@ -103,11 +103,9 @@
   </delete>
   <insert id="insert" parameterType="com.youyu.cotenant.entity.CotenantCommunication">
     insert into cotenant_communication (id, channel, send_user_id, 
-      receive_user_id, created_time, updated_time, 
-      is_deleted)
+      receive_user_id)
     values (#{id,jdbcType=BIGINT}, #{channel,jdbcType=VARCHAR}, #{sendUserId,jdbcType=BIGINT}, 
-      #{receiveUserId,jdbcType=BIGINT}, #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP}, 
-      #{isDeleted,jdbcType=BIT})
+      #{receiveUserId,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.youyu.cotenant.entity.CotenantCommunication">
     insert into cotenant_communication

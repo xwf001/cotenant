@@ -1,16 +1,22 @@
 package com.youyu.cotenant.web.rest.vm.chat;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 @Data
 public class ChatMessageOutVM {
 
     @JsonProperty("send_user_id")
-    private String sendUserId;
+    private Long sendUserId;
 
     @JsonProperty("receive_user_id")
-    private String receiveUserId;
+    private Long receiveUserId;
 
     @JsonProperty("send_user_name")
     private String sendUserName;
@@ -26,6 +32,9 @@ public class ChatMessageOutVM {
 
     private String content;
 
-    private String sendTime;
+    @JsonProperty("send_time")
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    private LocalDateTime sendTime;
 
 }

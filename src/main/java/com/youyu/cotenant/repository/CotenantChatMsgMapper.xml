@@ -108,13 +108,9 @@
   </delete>
   <insert id="insert" parameterType="com.youyu.cotenant.entity.CotenantChatMsg">
     insert into cotenant_chat_msg (id, channel, send_user_id, 
-      receive_user_id, content, sned_status, 
-      receive_status, send_time, receive_time, 
-      created_time, updated_time)
+      receive_user_id, content)
     values (#{id,jdbcType=BIGINT}, #{channel,jdbcType=VARCHAR}, #{sendUserId,jdbcType=BIGINT}, 
-      #{receiveUserId,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{snedStatus,jdbcType=INTEGER}, 
-      #{receiveStatus,jdbcType=INTEGER}, #{sendTime,jdbcType=TIMESTAMP}, #{receiveTime,jdbcType=TIMESTAMP}, 
-      #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP})
+      #{receiveUserId,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.youyu.cotenant.entity.CotenantChatMsg">
     insert into cotenant_chat_msg

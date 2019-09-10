@@ -17,7 +17,14 @@ public class ChatController {
 
     @PostMapping("/send")
     public ResponseResult send() {
-        chatService.send("my_channel_1","第一条java测试");
+       // chatService.send(1l,"第一条java测试","1");
         return ResponseResult.success();
     }
+
+
+
+
+
+
+
 }

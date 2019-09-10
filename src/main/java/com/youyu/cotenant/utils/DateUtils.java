@@ -6,6 +6,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class DateUtils {
 
@@ -17,6 +18,7 @@ public class DateUtils {
     public static LocalDateTime localDateTimeToStr(String dateStr, DateTimeFormatter dateFormat) {
         return LocalDateTime.parse(dateStr, dateFormat);
     }
+
 
     public static LocalDateTime timestampToLocalDateTime(String timestamp) {
         if (StringUtils.isBlank(timestamp))

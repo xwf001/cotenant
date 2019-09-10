@@ -63,4 +63,10 @@ public interface CotenantConstants {
 
     String UNREAD_MESSAGE_KEY = "unread_message_key_";
 
+
+    /**
+     * 即时通讯发送内容key
+     */
+    String CHAT_RECEIVE_KEY = "chat_receive_key_";
+
 }
